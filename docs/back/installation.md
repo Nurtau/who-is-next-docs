@@ -7,7 +7,7 @@ sidebar_position: 1
 # Установка
 
 ## Требования
-- Go
+- Go - для SMTP server, main backend
 - Docker 
 
 ## Репозиторий
