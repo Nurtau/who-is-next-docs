@@ -48,7 +48,7 @@ const config = {
       style: "dark",
       links: [
         {
-          title: "Repositories",
+          title: "Репозитории",
           items: [
             {
               label: "Front-end",
