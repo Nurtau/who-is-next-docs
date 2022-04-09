@@ -67,6 +67,7 @@ const config = {
       ],
     },
     prism: {
+      additionalLanguages: ["go", "swift"],
       theme: lightCodeTheme,
       darkTheme: darkCodeTheme,
     },

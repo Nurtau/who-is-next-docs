@@ -5,6 +5,6 @@ sidebar_position: 2
 ---
 # Что использовано
 ## Технологии
-
-
+- Websocket
+- Docker
 
