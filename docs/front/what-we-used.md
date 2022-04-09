@@ -19,10 +19,11 @@ sidebar_position: 2
 ```swift 
 func createWebSocketTask() {
     let urlSession = URLSession(configuration: .default)
-    webSocketTask = urlSession.webSocketTask(with: URL(string: "wss://echo.websocket.org")!)
+    webSocketTask = urlSession.webSocketTask(with: URL(string: "ws://b247-178-91-253-72.ngrok.io/ws/mail?email=\(AppSettings.default.to!)")!)
+    self.webSocketTask?.delegate = self
   }
   
-  func receive() {
+func receive() {
     webSocketTask?.receive { result in
       switch result {
       case .failure(let error):
@@ -30,7 +31,9 @@ func createWebSocketTask() {
       case .success(let message):
         switch message {
         case .string(let text):
-          self.textView.text += text
+          DispatchQueue.main.async {
+            self.textView.text += text
+          }
         case .data(let data):
           print("Received data: \(data)")
         @unknown default:
@@ -39,6 +42,18 @@ func createWebSocketTask() {
       }
       
       self.receive()
+    }
+  }
+  
+func sendPing() {
+    webSocketTask?.sendPing { (error) in
+      if let error = error {
+        print("Sending PING failed: \(error)")
+      }
+   
+      DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+        self.sendPing()
+      }
     }
   }
 ```
